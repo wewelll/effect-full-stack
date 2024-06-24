@@ -5,7 +5,7 @@ import {
   HttpServerResponse,
 } from '@effect/platform';
 import { Effect, pipe } from 'effect';
-import { getProducts, Product } from '../domain';
+import { getProductById, getProducts, Product, ProductId } from '../domain';
 import { Schema } from '@effect/schema';
 
 const router = pipe(
@@ -16,6 +16,14 @@ const router = pipe(
     pipe(
       getProducts,
       Effect.andThen(HttpServerResponse.schemaJson(Schema.Array(Product)))
+    )
+  ),
+  HttpRouter.get(
+    '/products/:productId',
+    pipe(
+      HttpRouter.schemaPathParams(Schema.Struct({ productId: ProductId })),
+      Effect.andThen(({ productId }) => getProductById(productId)),
+      Effect.andThen(HttpServerResponse.schemaJson(Product))
     )
   )
 );

@@ -3,7 +3,10 @@ import {
   HttpClientRequest,
   HttpClientResponse,
 } from '@effect/platform';
+import { pipe } from 'effect';
 
-export const fetchHelloWorld = HttpClientRequest.get(
-  'http://localhost:8080/'
-).pipe(HttpClient.fetchOk, HttpClientResponse.text);
+export const fetchHelloWorld = pipe(
+  HttpClientRequest.get('http://localhost:8080/'),
+  HttpClient.fetchOk,
+  HttpClientResponse.text
+);
