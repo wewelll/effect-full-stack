@@ -3,7 +3,7 @@ import {
   HttpClientRequest,
   HttpClientResponse,
 } from '@effect/platform';
-import { Product } from '../domain';
+import { Product } from '@effect-full-stack/domain';
 import { Schema } from '@effect/schema';
 
 export const fetchProductsJson = HttpClientRequest.get(

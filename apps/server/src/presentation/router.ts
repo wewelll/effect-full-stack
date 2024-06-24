@@ -1,6 +1,11 @@
 import { HttpRouter, HttpServerResponse } from '@effect/platform';
 import { Effect, Option, pipe } from 'effect';
-import { getProductById, getProducts, Product, ProductId } from '../domain';
+import {
+  getProductById,
+  getProducts,
+  Product,
+  ProductId,
+} from '@effect-full-stack/domain';
 import { Schema } from '@effect/schema';
 
 export const router = pipe(

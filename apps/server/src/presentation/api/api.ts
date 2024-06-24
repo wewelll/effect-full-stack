@@ -1,6 +1,6 @@
 import { pipe } from 'effect';
 import { Api } from 'effect-http';
-import { Product, ProductId } from '../../domain';
+import { Product, ProductId } from '@effect-full-stack/domain';
 import { Schema } from '@effect/schema';
 
 export const api = pipe(
