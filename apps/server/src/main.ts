@@ -1,7 +1,15 @@
 import { NodeHttpServer, NodeRuntime } from '@effect/platform-node';
 import { Layer, pipe } from 'effect';
-import { server } from './presentation/server';
+import { router } from './presentation';
 import { createServer } from 'http';
+import { HttpMiddleware, HttpServer } from '@effect/platform';
+
+export const server = pipe(
+  router,
+  HttpMiddleware.logger,
+  HttpServer.serve(),
+  HttpServer.withLogAddress
+);
 
 const program = pipe(
   server,

@@ -1,14 +1,9 @@
-import {
-  HttpMiddleware,
-  HttpRouter,
-  HttpServer,
-  HttpServerResponse,
-} from '@effect/platform';
+import { HttpRouter, HttpServerResponse } from '@effect/platform';
 import { Effect, Option, pipe } from 'effect';
 import { getProductById, getProducts, Product, ProductId } from '../domain';
 import { Schema } from '@effect/schema';
 
-const router = pipe(
+export const router = pipe(
   HttpRouter.empty,
   HttpRouter.get('/', HttpServerResponse.text('Hello World')),
   HttpRouter.get(
@@ -31,11 +26,4 @@ const router = pipe(
       )
     )
   )
-);
-
-export const server = pipe(
-  router,
-  HttpMiddleware.logger,
-  HttpServer.serve(),
-  HttpServer.withLogAddress
 );
