@@ -1,4 +1,5 @@
 import { Schema } from '@effect/schema';
+import { productsData } from './productsData';
 
 export const ProductId = Schema.UUID.pipe(Schema.brand('ProductId'));
 
@@ -17,3 +18,7 @@ export const Product = Schema.Struct({
   createdAt: Schema.Date,
   deletedAt: Schema.NullOr(Schema.Date),
 });
+
+export const getProducts = Schema.decodeUnknown(Schema.Array(Product))(
+  productsData
+);

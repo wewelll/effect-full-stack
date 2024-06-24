@@ -1,10 +1,9 @@
-import { Schema } from '@effect/schema';
-import { Product } from '../Product';
-import productsJson from '../products.json';
+import { getProducts } from '../Product';
+import { Effect } from 'effect';
 
 it('should decode a Product', () => {
-  const products = Schema.decodeUnknownSync(Schema.Array(Product))(
-    productsJson
-  );
+  const products = Effect.runSync(getProducts);
+
   expect(products).toBeTruthy();
+  expect(products.length).toBe(3);
 });
