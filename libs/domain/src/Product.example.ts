@@ -1,4 +1,6 @@
 import { Schema } from '@effect/schema';
+import { productsData } from './productsData';
+import { Array, Effect, pipe } from 'effect';
 
 export const ProductId = Schema.UUID.pipe(Schema.brand('ProductId'));
 export type ProductId = typeof ProductId.Type;
@@ -18,3 +20,13 @@ export const Product = Schema.Struct({
   createdAt: Schema.Date,
   deletedAt: Schema.NullOr(Schema.Date),
 });
+
+export const getProducts = Schema.decodeUnknown(Schema.Array(Product))(
+  productsData
+);
+
+export const getProductById = (id: ProductId) =>
+  pipe(
+    getProducts,
+    Effect.map(Array.findFirst((product) => product.id === id))
+  );

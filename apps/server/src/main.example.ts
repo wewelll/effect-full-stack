@@ -4,7 +4,7 @@ import {
   NodeRuntime,
 } from '@effect/platform-node';
 import { Layer, pipe } from 'effect';
-import { router } from './router';
+import { router } from './router.example';
 import { createServer } from 'http';
 import { HttpMiddleware, HttpRouter, HttpServer } from '@effect/platform';
 import { apiRouter } from './apiRouter';
